@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LokConnect - Government Grievance Redressal Portal</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+		<script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						colors: {
+							primary: {
+								50: "#f0f9ff",
+								100: "#e0f2fe",
+								200: "#bae6fd",
+								300: "#7dd3fc",
+								400: "#38bdf8",
+								500: "#0ea5e9",
+								600: "#0284c7",
+								700: "#0369a1",
+								800: "#075985",
+								900: "#0c4a6e",
+							},
+							secondary: {
+								50: "#f0fdf4",
+								100: "#dcfce7",
+								200: "#bbf7d0",
+								300: "#86efac",
+								400: "#4ade80",
+								500: "#22c55e",
+								600: "#16a34a",
+								700: "#15803d",
+								800: "#166534",
+								900: "#14532d",
+							},
+						},
+						animation: {
+							"fade-in": "fadeIn 1s ease-in-out",
+							"slide-up": "slideUp 0.8s ease-out",
+						},
+						keyframes: {
+							fadeIn: {
+								"0%": { opacity: "0" },
+								"100%": { opacity: "1" },
+							},
+							slideUp: {
+								"0%": { transform: "translateY(20px)", opacity: "0" },
+								"100%": { transform: "translateY(0)", opacity: "1" },
+							},
+						},
+					},
+				},
+			};
+		</script>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+			body {
+				font-family: "Poppins", sans-serif;
+				scroll-behavior: smooth;
+			}
+
+			.hero-illustration {
+				background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23e0f2fe" d="M250,50c110.5,0,200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250S139.5,50,250,50z"/><path fill="%23bae6fd" d="M250,100c82.8,0,150,67.2,150,150s-67.2,150-150,150S100,332.8,100,250S167.2,100,250,100z"/><circle fill="%237dd3fc" cx="250" cy="250" r="100"/><path fill="%2338bdf8" d="M250,150c55.2,0,100,44.8,100,100s-44.8,100-100,100s-100-44.8-100-100S194.8,150,250,150z"/></svg>');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				min-height: 300px;
+			}
+
+			.department-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+			}
+
+			.testimonial-card {
+				transition: all 0.3s ease;
+			}
+
+			.testimonial-card:hover {
+				transform: scale(1.03);
+			}
+
+			.animate-delay-100 {
+				animation-delay: 0.1s;
+			}
+
+			.animate-delay-200 {
+				animation-delay: 0.2s;
+			}
+
+			.animate-delay-300 {
+				animation-delay: 0.3s;
+			}
+		</style>
+	</head>
+	<body class="bg-gray-50">
+		<!-- Header/Navigation -->
+		<header class="sticky top-0 z-50 bg-white shadow-sm">
+			<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between h-16 items-center">
+					<div class="flex items-center">
+						<div class="flex-shrink-0 flex items-center">
+							<i class="fas fa-landmark text-primary-600 text-2xl mr-2"></i>
+							<span class="text-xl font-bold text-primary-700">LokConnect</span>
+						</div>
+					</div>
+					<div class="hidden md:block">
+						<div class="ml-10 flex items-center space-x-4">
+							<a
+								href="index.html"
+								class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 transition"
+								>Home</a
+							>
+							<a
+								href="#departments"
+								class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 transition"
+								>Departments</a
+							>
+							<a
+								href="login.html"
+								class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 transition"
+								>Login</a
+							>
+							<a
+								href="#"
+								class="ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition shadow-sm"
+								>Register Complaint</a
+							>
+						</div>
+					</div>
+					<div class="md:hidden">
+						<button
+							id="mobile-menu-button"
+							class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 focus:outline-none"
+						>
+							<i class="fas fa-bars"></i>
+						</button>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Mobile menu -->
+			<div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+				<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+					<a
+						href="index.html"
+						class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+						>Home</a
+					>
+					<a
+						href="#departments"
+						class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+						>Departments</a
+					>
+					<a
+						href="login.html"
+						class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+						>Login</a
+					>
+					<a
+						href="#"
+						class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary-600 hover:bg-primary-700"
+						>Register Complaint</a
+					>
+				</div>
+			</div>
+		</header>
+
+		<!-- Hero Section - Updated for mobile -->
+		<section class="relative overflow-hidden">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+				<div class="flex flex-col md:flex-row gap-8 items-center">
+					<!-- Content on top for mobile, left for desktop -->
+					<div class="animate-fade-in order-2 md:order-1 w-full md:w-1/2">
+						<h1
+							class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 md:mb-6"
+						>
+							Raise Your Voice for a
+							<span class="text-primary-600">Better Tomorrow</span>
+						</h1>
+						<p class="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
+							Report public issues directly to government departments and track
+							resolution progress in real-time. Your feedback helps improve our
+							community services.
+						</p>
+						<div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+							<a
+								href="#"
+								class="px-6 py-3 md:px-8 md:py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-md transition duration-300 transform hover:scale-105"
+							>
+								Get Started <i class="fas fa-arrow-right ml-2"></i>
+							</a>
+							<a
+								href="#"
+								class="px-6 py-3 md:px-8 md:py-3 border border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-50 transition"
+							>
+								Learn More
+							</a>
+						</div>
+					</div>
+
+					<!-- Illustration below for mobile, right for desktop -->
+					<div
+						class="animate-slide-up hero-illustration order-1 md:order-2 w-full md:w-1/2 h-64 md:h-96 mb-6 md:mb-0"
+					></div>
+				</div>
+			</div>
+			<div
+				class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"
+			></div>
+		</section>
+
+		<!-- Departments Section -->
+		<section id="departments" class="py-16 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-12 animate-fade-in">
+					<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+						Report Issues to Relevant Departments
+					</h2>
+					<p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+						Connect directly with the department responsible for resolving your
+						specific concern.
+					</p>
+				</div>
+
+				<div
+					class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6"
+				>
+					<!-- Department Card 1 -->
+					<div
+						class="department-card bg-white rounded-xl shadow-md p-4 md:p-6 transition duration-300 animate-slide-up animate-delay-100"
+					>
+						<div
+							class="w-12 md:w-16 h-12 md:h-16 bg-primary-50 rounded-full flex items-center justify-center mb-3 md:mb-4 mx-auto"
+						>
+							<i class="fas fa-bolt text-primary-600 text-xl md:text-2xl"></i>
+						</div>
+						<h3
+							class="text-base md:text-lg font-semibold text-center text-gray-800 mb-1 md:mb-2"
+						>
+							Electricity Department
+						</h3>
+						<p class="text-xs md:text-sm text-gray-500 text-center">
+							Power outages, billing issues, street lights
+						</p>
+					</div>
+
+					<!-- Department Card 2 -->
+					<div
+						class="department-card bg-white rounded-xl shadow-md p-4 md:p-6 transition duration-300 animate-slide-up animate-delay-200"
+					>
+						<div
+							class="w-12 md:w-16 h-12 md:h-16 bg-primary-50 rounded-full flex items-center justify-center mb-3 md:mb-4 mx-auto"
+						>
+							<i class="fas fa-tint text-primary-600 text-xl md:text-2xl"></i>
+						</div>
+						<h3
+							class="text-base md:text-lg font-semibold text-center text-gray-800 mb-1 md:mb-2"
+						>
+							Water Supply
+						</h3>
+						<p class="text-xs md:text-sm text-gray-500 text-center">
+							Water quality, leaks, supply interruptions
+						</p>
+					</div>
+
+					<!-- Department Card 3 -->
+					<div
+						class="department-card bg-white rounded-xl shadow-md p-4 md:p-6 transition duration-300 animate-slide-up animate-delay-300"
+					>
+						<div
+							class="w-12 md:w-16 h-12 md:h-16 bg-primary-50 rounded-full flex items-center justify-center mb-3 md:mb-4 mx-auto"
+						>
+							<i class="fas fa-road text-primary-600 text-xl md:text-2xl"></i>
+						</div>
+						<h3
+							class="text-base md:text-lg font-semibold text-center text-gray-800 mb-1 md:mb-2"
+						>
+							Roads & Infrastructure
+						</h3>
+						<p class="text-xs md:text-sm text-gray-500 text-center">
+							Potholes, repairs, new road requests
+						</p>
+					</div>
+
+					<!-- Department Card 4 -->
+					<div
+						class="department-card bg-white rounded-xl shadow-md p-4 md:p-6 transition duration-300 animate-slide-up animate-delay-100"
+					>
+						<div
+							class="w-12 md:w-16 h-12 md:h-16 bg-primary-50 rounded-full flex items-center justify-center mb-3 md:mb-4 mx-auto"
+						>
+							<i
+								class="fas fa-trash-alt text-primary-600 text-xl md:text-2xl"
+							></i>
+						</div>
+						<h3
+							class="text-base md:text-lg font-semibold text-center text-gray-800 mb-1 md:mb-2"
+						>
+							Sanitation & Waste
+						</h3>
+						<p class="text-xs md:text-sm text-gray-500 text-center">
+							Garbage collection, recycling, cleanliness
+						</p>
+					</div>
+
+					<!-- Department Card 5 -->
+					<div
+						class="department-card bg-white rounded-xl shadow-md p-4 md:p-6 transition duration-300 animate-slide-up animate-delay-200"
+					>
+						<div
+							class="w-12 md:w-16 h-12 md:h-16 bg-primary-50 rounded-full flex items-center justify-center mb-3 md:mb-4 mx-auto"
+						>
+							<i class="fas fa-bus text-primary-600 text-xl md:text-2xl"></i>
+						</div>
+						<h3
+							class="text-base md:text-lg font-semibold text-center text-gray-800 mb-1 md:mb-2"
+						>
+							Public Transport
+						</h3>
+						<p class="text-xs md:text-sm text-gray-500 text-center">
+							Bus schedules, fares, accessibility
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- How It Works Section -->
+		<section class="py-16 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-12 animate-fade-in">
+					<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+						How It Works
+					</h2>
+					<p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+						Simple steps to get your concerns addressed quickly and efficiently.
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+					<!-- Step 1 -->
+					<div
+						class="bg-white p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition duration-300 animate-slide-up animate-delay-100"
+					>
+						<div class="flex items-center mb-4 md:mb-6">
+							<div
+								class="w-10 md:w-12 h-10 md:h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3 md:mr-4"
+							>
+								<span class="text-primary-600 font-bold text-lg md:text-xl"
+									>1</span
+								>
+							</div>
+							<h3 class="text-lg md:text-xl font-semibold text-gray-800">
+								Login/Register
+							</h3>
+						</div>
+						<p class="text-sm md:text-base text-gray-600">
+							Create your secure citizen account or login if you already have
+							one. Verification ensures authenticity of complaints.
+						</p>
+						<div class="mt-4 md:mt-6">
+							<i
+								class="fas fa-user-check text-primary-500 text-2xl md:text-3xl"
+							></i>
+						</div>
+					</div>
+
+					<!-- Step 2 -->
+					<div
+						class="bg-white p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition duration-300 animate-slide-up animate-delay-200"
+					>
+						<div class="flex items-center mb-4 md:mb-6">
+							<div
+								class="w-10 md:w-12 h-10 md:h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3 md:mr-4"
+							>
+								<span class="text-primary-600 font-bold text-lg md:text-xl"
+									>2</span
+								>
+							</div>
+							<h3 class="text-lg md:text-xl font-semibold text-gray-800">
+								File Complaint
+							</h3>
+						</div>
+						<p class="text-sm md:text-base text-gray-600">
+							Select the relevant department, describe your issue, and upload
+							supporting documents or photos if available.
+						</p>
+						<div class="mt-4 md:mt-6">
+							<i
+								class="fas fa-file-alt text-primary-500 text-2xl md:text-3xl"
+							></i>
+						</div>
+					</div>
+
+					<!-- Step 3 -->
+					<div
+						class="bg-white p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition duration-300 animate-slide-up animate-delay-300"
+					>
+						<div class="flex items-center mb-4 md:mb-6">
+							<div
+								class="w-10 md:w-12 h-10 md:h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3 md:mr-4"
+							>
+								<span class="text-primary-600 font-bold text-lg md:text-xl"
+									>3</span
+								>
+							</div>
+							<h3 class="text-lg md:text-xl font-semibold text-gray-800">
+								Track Progress
+							</h3>
+						</div>
+						<p class="text-sm md:text-base text-gray-600">
+							Receive updates on your complaint status via email and SMS. Check
+							dashboard for real-time resolution progress.
+						</p>
+						<div class="mt-4 md:mt-6">
+							<i
+								class="fas fa-chart-line text-primary-500 text-2xl md:text-3xl"
+							></i>
+						</div>
+					</div>
+				</div>
+
+				<div class="mt-10 md:mt-12 text-center">
+					<a
+						href="#"
+						class="inline-flex items-center px-5 py-2 md:px-6 md:py-3 border border-transparent text-sm md:text-base font-medium rounded-md shadow-sm text-white bg-secondary-600 hover:bg-secondary-700 transition"
+					>
+						Watch Tutorial <i class="fas fa-play-circle ml-2"></i>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Stats Section -->
+		<section class="py-12 md:py-16 bg-primary-700 text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
+					<div class="animate-fade-in">
+						<div class="text-2xl md:text-4xl font-bold mb-1 md:mb-2">15K+</div>
+						<div class="text-xs md:text-sm text-primary-200">
+							Complaints Resolved
+						</div>
+					</div>
+					<div class="animate-fade-in animate-delay-100">
+						<div class="text-2xl md:text-4xl font-bold mb-1 md:mb-2">24</div>
+						<div class="text-xs md:text-sm text-primary-200">
+							Government Departments
+						</div>
+					</div>
+					<div class="animate-fade-in animate-delay-200">
+						<div class="text-2xl md:text-4xl font-bold mb-1 md:mb-2">72%</div>
+						<div class="text-xs md:text-sm text-primary-200">
+							Resolution Rate
+						</div>
+					</div>
+					<div class="animate-fade-in animate-delay-300">
+						<div class="text-2xl md:text-4xl font-bold mb-1 md:mb-2">3.2</div>
+						<div class="text-xs md:text-sm text-primary-200">
+							Avg. Resolution Days
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Testimonials Section -->
+		<section class="py-12 md:py-16 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-10 md:mb-12 animate-fade-in">
+					<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
+						What Citizens Say
+					</h2>
+					<p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+						Hear from people who have successfully resolved their issues through
+						our portal.
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
+					<!-- Testimonial 1 -->
+					<div
+						class="testimonial-card bg-gray-50 p-5 md:p-6 rounded-lg animate-slide-up animate-delay-100"
+					>
+						<div class="flex items-center mb-3 md:mb-4">
+							<img
+								class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover mr-3 md:mr-4"
+								src="https://randomuser.me/api/portraits/women/43.jpg"
+								alt="User testimonial"
+							/>
+							<div>
+								<h4 class="text-sm md:text-base font-semibold text-gray-800">
+									Priya Sharma
+								</h4>
+								<p class="text-xs md:text-sm text-gray-500">Mumbai Resident</p>
+							</div>
+						</div>
+						<p class="text-xs md:text-sm text-gray-600 italic mb-3 md:mb-4">
+							"Reported a water leakage issue in our area. The complaint was
+							resolved within 2 days! The tracking feature kept me updated
+							throughout."
+						</p>
+						<div class="flex text-yellow-400 text-sm md:text-base">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+						</div>
+					</div>
+
+					<!-- Testimonial 2 -->
+					<div
+						class="testimonial-card bg-gray-50 p-5 md:p-6 rounded-lg animate-slide-up animate-delay-200"
+					>
+						<div class="flex items-center mb-3 md:mb-4">
+							<img
+								class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover mr-3 md:mr-4"
+								src="https://randomuser.me/api/portraits/men/32.jpg"
+								alt="User testimonial"
+							/>
+							<div>
+								<h4 class="text-sm md:text-base font-semibold text-gray-800">
+									Raj Patel
+								</h4>
+								<p class="text-xs md:text-sm text-gray-500">
+									Small Business Owner
+								</p>
+							</div>
+						</div>
+						<p class="text-xs md:text-sm text-gray-600 italic mb-3 md:mb-4">
+							"The electricity department responded to my complaint about
+							frequent power cuts within hours. Now our shop has stable power
+							supply."
+						</p>
+						<div class="flex text-yellow-400 text-sm md:text-base">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star-half-alt"></i>
+						</div>
+					</div>
+
+					<!-- Testimonial 3 -->
+					<div
+						class="testimonial-card bg-gray-50 p-5 md:p-6 rounded-lg animate-slide-up animate-delay-300"
+					>
+						<div class="flex items-center mb-3 md:mb-4">
+							<img
+								class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover mr-3 md:mr-4"
+								src="https://randomuser.me/api/portraits/women/65.jpg"
+								alt="User testimonial"
+							/>
+							<div>
+								<h4 class="text-sm md:text-base font-semibold text-gray-800">
+									Ananya Gupta
+								</h4>
+								<p class="text-xs md:text-sm text-gray-500">College Student</p>
+							</div>
+						</div>
+						<p class="text-xs md:text-sm text-gray-600 italic mb-3 md:mb-4">
+							"I reported a dangerous pothole near my college. It was fixed the
+							next day! So grateful for this efficient system."
+						</p>
+						<div class="flex text-yellow-400 text-sm md:text-base">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Newsletter Section -->
+		<section
+			class="py-12 md:py-16 bg-gradient-to-r from-primary-500 to-primary-600 text-white"
+		>
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div
+					class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center"
+				>
+					<div class="animate-fade-in">
+						<h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
+							Stay Informed
+						</h2>
+						<p class="text-sm md:text-base mb-4 md:mb-6">
+							Subscribe to our newsletter for updates on civic issues, complaint
+							resolutions, and community initiatives.
+						</p>
+						<div class="flex items-center">
+							<i
+								class="fas fa-envelope-open-text text-lg md:text-2xl mr-3 md:mr-4"
+							></i>
+							<span class="text-xs md:text-sm"
+								>We respect your privacy. Unsubscribe anytime.</span
+							>
+						</div>
+					</div>
+					<div class="animate-slide-up">
+						<form class="flex flex-col sm:flex-row gap-3 md:gap-4">
+							<input
+								type="email"
+								placeholder="Your email address"
+								class="flex-grow px-4 py-2 md:py-3 rounded-lg focus:outline-none text-gray-900 text-sm md:text-base"
+							/>
+							<button
+								type="submit"
+								class="px-5 py-2 md:px-6 md:py-3 bg-secondary-600 hover:bg-secondary-700 font-medium rounded-lg shadow transition text-sm md:text-base"
+							>
+								Subscribe <i class="fas fa-paper-plane ml-2"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="bg-gray-900 text-white pt-10 md:pt-12 pb-6 md:pb-8">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div
+					class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 mb-6 md:mb-8"
+				>
+					<div>
+						<h3 class="text-base md:text-lg font-semibold mb-3 md:mb-4">
+							LokConnect
+						</h3>
+						<p class="text-xs md:text-sm text-gray-400">
+							Bridging the gap between citizens and government through
+							transparent grievance redressal.
+						</p>
+					</div>
+					<div>
+						<h3 class="text-base md:text-lg font-semibold mb-3 md:mb-4">
+							Quick Links
+						</h3>
+						<ul class="space-y-1 md:space-y-2">
+							<li>
+								<a
+									href="index.html"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Home</a
+								>
+							</li>
+							<li>
+								<a
+									href="#departments"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Departments</a
+								>
+							</li>
+							<li>
+								<a
+									href="login.html"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Login</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Register Complaint</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-base md:text-lg font-semibold mb-3 md:mb-4">
+							Legal
+						</h3>
+						<ul class="space-y-1 md:space-y-2">
+							<li>
+								<a
+									href="#"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Privacy Policy</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Terms of Use</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-xs md:text-sm text-gray-400 hover:text-white transition"
+									>Cookie Policy</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-base md:text-lg font-semibold mb-3 md:mb-4">
+							Connect
+						</h3>
+						<div class="flex space-x-3 md:space-x-4 mb-3 md:mb-4">
+							<a
+								href="#"
+								class="text-gray-400 hover:text-white transition text-sm md:text-base"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a
+								href="#"
+								class="text-gray-400 hover:text-white transition text-sm md:text-base"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a
+								href="#"
+								class="text-gray-400 hover:text-white transition text-sm md:text-base"
+								><i class="fab fa-instagram"></i
+							></a>
+							<a
+								href="#"
+								class="text-gray-400 hover:text-white transition text-sm md:text-base"
+								><i class="fab fa-linkedin-in"></i
+							></a>
+						</div>
+						<p class="text-xs md:text-sm text-gray-400">
+							<i class="fas fa-phone-alt mr-1 md:mr-2"></i> +91XXXXXXXXXX
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Mobile menu toggle
+			document
+				.getElementById("mobile-menu-button")
+				.addEventListener("click", function () {
+					const menu = document.getElementById("mobile-menu");
+					menu.classList.toggle("hidden");
+				});
+
+			// Smooth scrolling for anchor links
+			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener("click", function (e) {
+					e.preventDefault();
+
+					const targetId = this.getAttribute("href");
+					if (targetId === "#") return;
+
+					const targetElement = document.querySelector(targetId);
+					if (targetElement) {
+						targetElement.scrollIntoView({
+							behavior: "smooth",
+						});
+
+						// Close mobile menu if open
+						const mobileMenu = document.getElementById("mobile-menu");
+						if (!mobileMenu.classList.contains("hidden")) {
+							mobileMenu.classList.add("hidden");
+						}
+					}
+				});
+			});
+
+			// Animation on scroll
+			const animateOnScroll = () => {
+				const elements = document.querySelectorAll(
+					".animate-fade-in, .animate-slide-up"
+				);
+
+				elements.forEach((element) => {
+					const elementPosition = element.getBoundingClientRect().top;
+					const screenPosition = window.innerHeight / 1.2;
+
+					if (elementPosition < screenPosition) {
+						element.style.opacity = "1";
+						element.style.transform = "translateY(0)";
+					}
+				});
+			};
+
+			// Initial check
+			animateOnScroll();
+
+			// Check on scroll
+			window.addEventListener("scroll", animateOnScroll);
+		</script>
+	</body>
+</html>
