@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LokConnect - Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-landmark text-primary-600 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-primary-700">LokConnect</span>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-center space-x-4">
+              <a
+                href="index.html"
+                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 transition"
+                >Home</a
+              >
+              <!-- <a
+								href="#"
+								class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-primary-600 transition"
+								>About</a
+							> -->
+            </div>
+          </div>
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 focus:outline-none"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="index.html"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+            >About</a
+          >
+          <a
+            href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary-600 hover:bg-primary-700"
+            >Login</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="flex-grow flex items-center justify-center py-8 md:py-12 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="w-full max-w-md animate-fade-in">
+        <div
+          class="bg-white rounded-xl shadow-lg overflow-hidden form-container"
+        >
+          <!-- Form Tabs -->
+          <div class="flex border-b">
+            <button
+              id="login-tab"
+              class="flex-1 py-4 px-4 text-center font-medium text-white bg-primary-600"
+            >
+              <i class="fas fa-sign-in-alt mr-2"></i> Login
+            </button>
+            <button
+              id="register-tab"
+              class="flex-1 py-4 px-4 text-center font-medium text-gray-700 hover:text-primary-600 bg-gray-100"
+            >
+              <i class="fas fa-user-plus mr-2"></i> Register
+            </button>
+          </div>
+
+          <!-- Login Form -->
+          <div id="login-form" class="p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+              Welcome Back
+            </h2>
+
+            <form class="space-y-5">
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-user text-gray-400 mr-2"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-lock text-gray-400 mr-2"></i>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Password"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+                <span
+                  class="password-toggle text-gray-400 ml-2"
+                  onclick="togglePassword('login-password', 'login-eye')"
+                >
+                  <i id="login-eye" class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <input
+                    id="remember-me"
+                    type="checkbox"
+                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  />
+                  <label
+                    for="remember-me"
+                    class="ml-2 block text-sm text-gray-700"
+                    >Remember me</label
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="text-sm text-primary-600 hover:text-primary-800"
+                  >Forgot password?</a
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition duration-300"
+              >
+                Login <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </form>
+
+            <div class="mt-6 text-center">
+              <p class="text-sm text-gray-600">
+                Don't have an account?
+                <button
+                  id="show-register"
+                  class="toggle-form text-primary-600 font-medium"
+                >
+                  Register here
+                </button>
+              </p>
+            </div>
+          </div>
+
+          <!-- Registration Form (Hidden by default) -->
+          <div id="register-form" class="hidden p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+              Create Account
+            </h2>
+
+            <form class="space-y-5">
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-user text-gray-400 mr-2"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-id-card text-gray-400 mr-2"></i>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-envelope text-gray-400 mr-2"></i>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-phone text-gray-400 mr-2"></i>
+                <input
+                  type="tel"
+                  placeholder="Mobile Number"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-lock text-gray-400 mr-2"></i>
+                <input
+                  type="password"
+                  id="register-password"
+                  placeholder="Password"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+                <span
+                  class="password-toggle text-gray-400 ml-2"
+                  onclick="togglePassword('register-password', 'register-eye')"
+                >
+                  <i id="register-eye" class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+
+              <div
+                class="input-group flex items-center border rounded-lg px-3 py-2 focus-within:border-primary-500"
+              >
+                <i class="fas fa-lock text-gray-400 mr-2"></i>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Confirm Password"
+                  class="flex-grow outline-none text-gray-700"
+                  required
+                />
+                <span
+                  class="password-toggle text-gray-400 ml-2"
+                  onclick="togglePassword('confirm-password', 'confirm-eye')"
+                >
+                  <i id="confirm-eye" class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  id="terms"
+                  type="checkbox"
+                  class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  required
+                />
+                <label for="terms" class="ml-2 block text-sm text-gray-700">
+                  I agree to the
+                  <a href="#" class="text-primary-600 hover:text-primary-800"
+                    >Terms of Service</a
+                  >
+                  and
+                  <a href="#" class="text-primary-600 hover:text-primary-800"
+                    >Privacy Policy</a
+                  >
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-secondary-600 hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition duration-300"
+              >
+                Register <i class="fas fa-user-plus ml-2"></i>
+              </button>
+            </form>
+
+            <div class="mt-6 text-center">
+              <p class="text-sm text-gray-600">
+                Already have an account?
+                <button
+                  id="show-login"
+                  class="toggle-form text-primary-600 font-medium"
+                >
+                  Login here
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-xs md:text-sm text-gray-400">
+          &copy; 2023 LokConnect. All rights reserved.
+          <a href="#" class="text-primary-400 hover:text-primary-300"
+            >Privacy Policy</a
+          >
+          |
+          <a href="#" class="text-primary-400 hover:text-primary-300"
+            >Terms of Service</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script src="login.js"></script>
+  </body>
+</html>

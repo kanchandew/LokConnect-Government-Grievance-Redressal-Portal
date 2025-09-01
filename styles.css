@@ -1,0 +1,110 @@
+/* index page */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+.hero-illustration {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path fill="%23e0f2fe" d="M250,50c110.5,0,200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250S139.5,50,250,50z"/><path fill="%23bae6fd" d="M250,100c82.8,0,150,67.2,150,150s-67.2,150-150,150S100,332.8,100,250S167.2,100,250,100z"/><circle fill="%237dd3fc" cx="250" cy="250" r="100"/><path fill="%2338bdf8" d="M250,150c55.2,0,100,44.8,100,100s-44.8,100-100,100s-100-44.8-100-100S194.8,150,250,150z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 300px;
+}
+
+.department-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.03);
+}
+
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-300 {
+  animation-delay: 0.3s;
+}
+/* login page */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+.form-container {
+  background: linear-gradient(
+    135deg,
+    rgba(224, 242, 254, 0.8) 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
+}
+
+.toggle-form {
+  transition: all 0.3s ease;
+}
+
+.toggle-form:hover {
+  color: #0ea5e9;
+  text-decoration: underline;
+}
+
+.input-group {
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.password-toggle {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: #0ea5e9;
+}
+/* admin update */
+body {
+  font-family: "Poppins", sans-serif;
+}
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LokConnect User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+      .delay-4 {
+        animation-delay: 0.4s;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-hover:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header/Navbar -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+      <nav
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-landmark text-blue-800 text-2xl mr-2"></i>
+          <span class="text-xl font-bold text-blue-800">LokConnect</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="text-blue-600 font-medium hover:text-blue-800"
+            >Dashboard</a
+          >
+          <a href="#complaints" class="text-gray-600 hover:text-blue-600"
+            >My Complaints</a
+          >
+          <!-- <a href="#" class="text-gray-600 hover:text-blue-600">Help</a> -->
+          <button
+            class="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition"
+          >
+            Logout
+          </button>
+        </div>
+        <button id="mobile-menu-button" class="md:hidden text-gray-600">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </nav>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white py-2 px-4 shadow-lg"
+      >
+        <a href="#" class="block py-2 text-blue-600 font-medium">Dashboard</a>
+        <a href="#complaints" class="block py-2 text-gray-600">My Complaints</a>
+        <a href="#" class="block py-2 text-gray-600">Help</a>
+        <button
+          class="w-full mt-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition"
+        >
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-6">
+      <!-- Welcome Section -->
+      <section class="mb-10 fade-in">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+          Welcome back, <span class="text-blue-600">Alex Johnson</span>
+        </h1>
+        <p class="text-gray-600 text-lg">
+          You can file a new complaint or track your existing grievances below.
+        </p>
+
+        <!-- Quick Action Buttons -->
+        <div class="flex flex-wrap gap-4 mt-6">
+          <button
+            id="new-complaint-btn"
+            class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition btn-hover flex items-center"
+          >
+            <i class="fas fa-plus-circle mr-2"></i> Register New Complaint
+          </button>
+          <a
+            href="#complaints"
+            class="px-6 py-3 bg-white border border-blue-200 text-blue-600 rounded-lg shadow-sm hover:bg-blue-50 transition btn-hover flex items-center"
+          >
+            <i class="fas fa-list-ul mr-2"></i> View My Complaints
+          </a>
+        </div>
+      </section>
+
+      <!-- Departments Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 fade-in">
+          File a Complaint by Department
+        </h2>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
+        >
+          <!-- Department Card 1 -->
+          <div
+            class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 card-hover fade-in delay-1"
+          >
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl mb-4"
+              >
+                ⚡
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                Electricity Department
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Report power outages, billing issues, or electrical hazards
+              </p>
+              <button
+                class="w-full py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition"
+                data-dept="Electricity"
+              >
+                File Complaint
+              </button>
+            </div>
+          </div>
+
+          <!-- Department Card 2 -->
+          <div
+            class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 card-hover fade-in delay-2"
+          >
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl mb-4"
+              >
+                💧
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                Water Supply
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Report water leaks, quality issues, or supply problems
+              </p>
+              <button
+                class="w-full py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition"
+                data-dept="Water"
+              >
+                File Complaint
+              </button>
+            </div>
+          </div>
+
+          <!-- Department Card 3 -->
+          <div
+            class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 card-hover fade-in delay-3"
+          >
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xl mb-4"
+              >
+                🛣️
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                Roads & Infrastructure
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Report potholes, damaged roads, or street light issues
+              </p>
+              <button
+                class="w-full py-2 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition"
+                data-dept="Roads"
+              >
+                File Complaint
+              </button>
+            </div>
+          </div>
+
+          <!-- Department Card 4 -->
+          <div
+            class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 card-hover fade-in delay-1"
+          >
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl mb-4"
+              >
+                ♻️
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                Sanitation & Waste
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Report garbage collection issues or sanitation problems
+              </p>
+              <button
+                class="w-full py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition"
+                data-dept="Sanitation"
+              >
+                File Complaint
+              </button>
+            </div>
+          </div>
+
+          <!-- Department Card 5 -->
+          <div
+            class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 card-hover fade-in delay-2"
+          >
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xl mb-4"
+              >
+                🚍
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                Public Transport
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Report bus/train issues, schedule problems, or facilities
+              </p>
+              <button
+                class="w-full py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition"
+                data-dept="Transport"
+              >
+                File Complaint
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Status Summary Widgets -->
+      <section class="mb-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-xl shadow-sm p-6 fade-in delay-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-500">Pending Complaints</p>
+              <h3 class="text-3xl font-bold text-gray-700">4</h3>
+            </div>
+            <div
+              class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-500"
+            >
+              <i class="fas fa-clock text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 fade-in delay-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-amber-500">In Progress</p>
+              <h3 class="text-3xl font-bold text-gray-700">2</h3>
+            </div>
+            <div
+              class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center text-amber-500"
+            >
+              <i class="fas fa-spinner text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 fade-in delay-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-green-500">Resolved</p>
+              <h3 class="text-3xl font-bold text-gray-700">7</h3>
+            </div>
+            <div
+              class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-500"
+            >
+              <i class="fas fa-check-circle text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Complaint History Section -->
+      <section id="complaints" class="mb-12">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 fade-in">
+            My Complaints
+          </h2>
+          <div class="relative fade-in delay-1">
+            <!-- <select
+              class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option>All</option>
+              <option>Pending</option>
+              <option>In Progress</option>
+              <option>Resolved</option>
+            </select> -->
+            <!-- <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <i class="fas fa-chevron-down"></i>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Desktop Table -->
+        <div class="hidden md:block overflow-x-auto fade-in delay-2">
+          <table class="min-w-full bg-white rounded-lg overflow-hidden">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Complaint ID
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Department
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Last Updated
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"
+                >
+                  #GRP-2023-0456
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  Roads & Infrastructure
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                    >Resolved</span
+                  >
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  2 days ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <button class="text-blue-600 hover:text-blue-800">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"
+                >
+                  #GRP-2023-0455
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  Electricity Department
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-800"
+                    >In Progress</span
+                  >
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  1 week ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <button class="text-blue-600 hover:text-blue-800">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"
+                >
+                  #GRP-2023-0454
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  Water Supply
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800"
+                    >Pending</span
+                  >
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  1 week ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <button class="text-blue-600 hover:text-blue-800">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"
+                >
+                  #GRP-2023-0453
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  Public Transport
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                    >Resolved</span
+                  >
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  2 weeks ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <button class="text-blue-600 hover:text-blue-800">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile Cards -->
+        <div class="md:hidden space-y-4 fade-in delay-2">
+          <!-- Complaint Card 1 -->
+          <div class="bg-white rounded-lg shadow-sm p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-medium text-blue-600">#GRP-2023-0456</h3>
+                <p class="text-gray-600 text-sm">Roads & Infrastructure</p>
+              </div>
+              <span
+                class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                >Resolved</span
+              >
+            </div>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-gray-500 text-sm">Updated 2 days ago</span>
+              <button class="text-blue-600 text-sm font-medium">
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Complaint Card 2 -->
+          <div class="bg-white rounded-lg shadow-sm p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-medium text-blue-600">#GRP-2023-0455</h3>
+                <p class="text-gray-600 text-sm">Electricity Department</p>
+              </div>
+              <span
+                class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-800"
+                >In Progress</span
+              >
+            </div>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-gray-500 text-sm">Updated 1 week ago</span>
+              <button class="text-blue-600 text-sm font-medium">
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Complaint Card 3 -->
+          <div class="bg-white rounded-lg shadow-sm p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-medium text-blue-600">#GRP-2023-0454</h3>
+                <p class="text-gray-600 text-sm">Water Supply</p>
+              </div>
+              <span
+                class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800"
+                >Pending</span
+              >
+            </div>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="text-gray-500 text-sm">Updated 1 week ago</span>
+              <button class="text-blue-600 text-sm font-medium">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="mt-6 text-center fade-in delay-3">
+          <button
+            class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+          >
+            Load More Complaints
+          </button>
+        </div> -->
+      </section>
+    </main>
+
+    <!-- Complaint Modal -->
+    <div id="complaint-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                <div class="flex justify-between items-center mb-4">
+                  <h3
+                    class="text-lg leading-6 font-medium text-gray-900"
+                    id="modal-title"
+                  >
+                    Register New Complaint
+                  </h3>
+                  <button
+                    id="close-modal"
+                    class="text-gray-400 hover:text-gray-500"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <div class="mt-2">
+                  <form id="complaint-form">
+                    <div class="mb-4">
+                      <label
+                        for="department"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        >Department</label
+                      >
+                      <select
+                        id="department"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        <option value="">Select Department</option>
+                        <option value="Electricity">
+                          Electricity Department
+                        </option>
+                        <option value="Water">Water Supply</option>
+                        <option value="Roads">Roads & Infrastructure</option>
+                        <option value="Sanitation">Sanitation & Waste</option>
+                        <option value="Transport">Public Transport</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-4">
+                      <label
+                        for="subject"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        >Subject</label
+                      >
+                      <input
+                        type="text"
+                        id="subject"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Brief description of your complaint"
+                      />
+                    </div>
+
+                    <div class="mb-4">
+                      <label
+                        for="description"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        >Description</label
+                      >
+                      <textarea
+                        id="description"
+                        rows="4"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Provide detailed information about your complaint"
+                      ></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                      <label
+                        for="location"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        >Location</label
+                      >
+                      <input
+                        type="text"
+                        id="location"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Where is the issue located?"
+                      />
+                    </div>
+
+                    <div class="mb-4">
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                        >Upload Evidence (Optional)</label
+                      >
+                      <div
+                        class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg"
+                      >
+                        <div class="space-y-1 text-center">
+                          <div class="flex text-sm text-gray-600">
+                            <label
+                              for="file-upload"
+                              class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
+                            >
+                              <span>Upload a file</span>
+                              <input
+                                id="file-upload"
+                                name="file-upload"
+                                type="file"
+                                class="sr-only"
+                              />
+                            </label>
+                            <p class="pl-1">or drag and drop</p>
+                          </div>
+                          <p class="text-xs text-gray-500">
+                            PNG, JPG, PDF up to 5MB
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Submit Complaint
+            </button>
+            <button
+              id="cancel-modal"
+              type="button"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-landmark text-blue-800 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-blue-800">LokConnect</span>
+            </div>
+            <p class="text-gray-600 text-sm mt-2">
+              Your voice matters. <br />Together we build better communities.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-4 md:gap-8">
+            <a href="#" class="text-gray-600 hover:text-blue-600 text-sm"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-600 hover:text-blue-600 text-sm"
+              >Terms of Service</a
+            >
+            <a href="#" class="text-gray-600 hover:text-blue-600 text-sm"
+              >Contact Us</a
+            >
+            <!-- <a href="#" class="text-gray-600 hover:text-blue-600 text-sm"
+              >FAQ</a
+            > -->
+          </div>
+        </div>
+        <div
+          class="mt-6 pt-6 border-t border-gray-200 text-center text-gray-500 text-sm"
+        >
+          © 2025 Grievance Redressal Portal. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="user.js"></script>
+  </body>
+</html>
